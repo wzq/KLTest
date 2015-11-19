@@ -10,11 +10,15 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.widget.TextView
+import kotlin.properties.Delegates
+import kotlinx.android.synthetic.content_main.t1
+
 /**
  * Created by wzq on 15/11/5.
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    var drawer : DrawerLayout? = null
+    var drawer : DrawerLayout by Delegates.notNull() //设置一个非空代理,如写之前读则抛一个异常
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +28,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         val fab = findViewById(R.id.fab) as FloatingActionButton
-        fab.setOnClickListener { println((findViewById(R.id.t1) as TextView).text) }
+        fab.setOnClickListener { println(t1.text) }
 
         drawer = findViewById(R.id.drawer_layout) as DrawerLayout
-        val toggle = ActionBarDrawerToggle(this , drawer, toolbar, R.string.app_name, R.string.app_name)
-        drawer?.setDrawerListener(toggle)
+        val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.app_name, R.string.app_name)
+        drawer.setDrawerListener(toggle)
         toggle.syncState()
 
         val navigationView  = findViewById(R.id.nav_view) as NavigationView
@@ -36,15 +40,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onBackPressed() {
-        if (drawer?.isDrawerOpen(GravityCompat.START)!!) {
-            drawer?.closeDrawer(GravityCompat.START)
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem?): Boolean {
-        drawer?.closeDrawer(GravityCompat.START)
+        drawer.closeDrawer(GravityCompat.START)
         return true
     }
+
+
 }
