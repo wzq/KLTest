@@ -1,5 +1,6 @@
 package com.wzq.kltest
 
+import android.app.ActivityOptions
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
@@ -10,8 +11,10 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.widget.TextView
+import com.pawegio.kandroid.IntentFor
+import com.pawegio.kandroid.toast
 import kotlin.properties.Delegates
-import kotlinx.android.synthetic.content_main.t1
+//import kotlinx.android.synthetic.content_main.t1
 
 /**
  * Created by wzq on 15/11/5.
@@ -28,7 +31,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         val fab = findViewById(R.id.fab) as FloatingActionButton
-        fab.setOnClickListener { println(t1.text) }
+        fab.setOnClickListener {
+            val transitionActivity = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity)
+            startActivity(IntentFor<TransitionActivity>(this@MainActivity), transitionActivity.toBundle())
+        }
 
         drawer = findViewById(R.id.drawer_layout) as DrawerLayout
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.app_name, R.string.app_name)
