@@ -1,27 +1,24 @@
 package com.wzq.kltest
 
-import android.app.ActivityOptions
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
-import android.widget.TextView
 import com.pawegio.kandroid.IntentFor
-import com.pawegio.kandroid.toast
 import kotlin.properties.Delegates
-//import kotlinx.android.synthetic.content_main.t1
 
 /**
  * Created by wzq on 15/11/5.
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var drawer : DrawerLayout by Delegates.notNull() //设置一个非空代理,如写之前读则抛一个异常
-
+    //import kotlinx.android.synthetic.content_main.t1 自动映射
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +29,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val fab = findViewById(R.id.fab) as FloatingActionButton
         fab.setOnClickListener {
-            val transitionActivity = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity)
+            val transitionActivity = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity)
             startActivity(IntentFor<TransitionActivity>(this@MainActivity), transitionActivity.toBundle())
         }
 
