@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val fab = findViewById(R.id.fab) as FloatingActionButton
         fab.setOnClickListener {
+            println(21)
             val transitionActivity = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity)
             startActivity(IntentFor<TransitionActivity>(this@MainActivity), transitionActivity.toBundle())
         }
