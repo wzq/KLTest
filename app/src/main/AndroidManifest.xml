@@ -22,6 +22,9 @@
         <activity android:name=".TransitionActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <activity android:name=".CardsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>
